@@ -1,0 +1,182 @@
+/* styles/Home.module.css */
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 20px;
+  position: relative;
+}
+
+/* Seção Home */
+.home {
+  width: 90%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 2rem;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.left, .right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(245, 228, 208, 0.9), rgba(230, 204, 181, 0.9));
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(139, 69, 19, 0.2);
+  transition: all 0.4s ease;
+}
+
+.center:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(139, 69, 19, 0.3);
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+}
+
+.image:hover {
+  transform: scale(1.03);
+}
+
+/* Seção Sobre */
+.about {
+  width: 90%;
+  max-width: 1200px;
+  margin: 3rem auto;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.sobre {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+/* Seção Serviços */
+.services {
+  width: 90%;
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 3rem;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.servicesContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.serviceCard {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.serviceCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.serviceImage {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 10px;
+  margin: 0 auto 1rem;
+  display: block;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .servicesContainer {
+    flex-direction: column;
+  }
+  
+  .serviceCard {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Seção Depoimentos */
+.report {
+  width: 90%;
+  max-width: 1200px;
+  margin: 3rem auto;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .home {
+    grid-template-columns: 1fr;
+  }
+  
+  .sobre {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 60px 15px;
+  }
+  
+  .home, .about, .services, .report {
+    padding: 1.5rem;
+  }
+  
+  .serviceGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section {
+  animation: fadeIn 0.8s ease-out forwards;
+}

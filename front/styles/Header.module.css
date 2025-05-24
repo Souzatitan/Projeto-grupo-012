@@ -1,0 +1,160 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 5%;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #d6b99a;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.navList {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navLink {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+}
+
+.navLink:hover {
+  color: #fff;
+  background: #d6b99a;
+  transform: translateY(-2px);
+}
+
+.loginButton {
+  background: linear-gradient(to right, #d6b99a, #c9a583);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(214, 185, 154, 0.3);
+}
+
+.loginButton:hover {
+  background: linear-gradient(to right, #c9a583, #b9926c);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(214, 185, 154, 0.4);
+}
+
+/* Modal de Login */
+.loginModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* Usando viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centraliza verticalmente */
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  z-index: 2000;
+  overflow-y: auto; /* Permite scroll se necessário */
+  padding: 20px; /* Espaço nas bordas em telas pequenas */
+opacity: 0;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.modalContent {
+  position: relative; /* Mantém o botão de fechar posicionado */
+  background: white;
+  padding: 2.5rem;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 400px;
+  max-height: 90vh; /* Limita altura e permite scroll interno */
+  overflow-y: auto; /* Scroll interno se conteúdo for muito grande */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  margin: auto; /* Centraliza em relação ao viewport */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: translateY(20px);
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+@keyframes slideUp {
+  to { transform: translateY(0); }
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #777;
+}
+
+.modalContent h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #5a4a42;
+}
+
+.inputField {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  border: 2px solid #e6d5c3;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.inputField:focus {
+  border-color: #d6b99a;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(214, 185, 154, 0.2);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  .navList {
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .navLink {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.8rem;
+  }
+}
