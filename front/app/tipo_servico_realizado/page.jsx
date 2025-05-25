@@ -132,7 +132,16 @@ export default function TipoServicoRealizadoPage() {
 
   return (
     <div className={styles.dashboardContent}>
-      <h2 style={{ marginBottom: '2rem' }}>Serviços Realizados</h2>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+        <h2>Serviços Realizados</h2>
+        <button 
+          onClick={() => router.push('/dashboard')} 
+          className={styles.submitButton}
+          style={{ marginLeft: 'auto' }}
+        >
+          ← Voltar
+        </button>
+      </div>
 
       {erro && <p style={{ color: 'red' }}>{erro}</p>}
 
