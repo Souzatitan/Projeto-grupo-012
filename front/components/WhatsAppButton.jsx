@@ -7,7 +7,7 @@ export default function WhatsAppButton() {
   const [showTooltip, setShowTooltip] = useState(false);
   
   // Substitua pelo seu número de WhatsApp (apenas números, sem espaços ou caracteres especiais)
-  const phoneNumber = '5516988105605'; 
+  const phoneNumber = '5516999999999'; 
   const message = 'Olá, gostaria de mais informações sobre seus serviços!';
   
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
