@@ -19,6 +19,8 @@ Este projeto foi desenvolvido como parte de um trabalho integrador com o objetiv
   - Sequelize (ORM)
   - PostgreSQL
   - SQL
+  - AWS
+  
 
 - **Gerenciamento de Sessões:**
   - express-session
