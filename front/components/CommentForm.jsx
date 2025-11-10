@@ -1,3 +1,4 @@
+// components/CommentForm.jsx
 'use client';
 import { useState, useEffect } from 'react';
 import styles from '@/styles/Comments.module.css';
@@ -34,16 +35,25 @@ export default function CommentForm() {
       return;
     }
 
-    if (!name || !comment) {
+    if (!name.trim() || !comment.trim()) {
       setError('Por favor, preencha todos os campos.');
+      return;
+    }
+
+    if (name.trim().length < 2) {
+      setError('O nome deve ter pelo menos 2 caracteres.');
       return;
     }
 
     // Adiciona novo comentário
     const newComment = {
-      name,
-      comment,
-      date: new Date().toLocaleDateString('pt-BR')
+      name: name.trim(),
+      comment: comment.trim(),
+      date: new Date().toLocaleDateString('pt-BR'),
+      time: new Date().toLocaleTimeString('pt-BR', { 
+        hour: '2-digit', 
+        minute: '2-digit' 
+      })
     };
     
     const newComments = [newComment, ...comments.slice(0, 3)];
@@ -58,18 +68,39 @@ export default function CommentForm() {
   };
 
   return (
-    <section className={styles.reportSection} id="report">
-      <h3>Deixe Seu Depoimento</h3>
+    <section 
+      className={styles.reportSection} 
+      id="report"
+      aria-labelledby="report-title"
+    >
+      <h2 id="report-title">Deixe Seu Depoimento</h2>
       
       <div className={styles.commentContainer}>
         <form 
           onSubmit={handleSubmit}
           className={styles.commentForm}
+          noValidate
         >
-          {error && <span className={styles.errorMessage}>{error}</span>}
+          <div className={styles.formHeader}>
+            <h3>Compartilhe Sua Experiência</h3>
+            <p>Seu depoimento ajuda outros clientes</p>
+          </div>
+
+          {error && (
+            <div 
+              className={styles.errorMessage}
+              role="alert"
+              aria-live="polite"
+            >
+              {error}
+            </div>
+          )}
           
           <div className={styles.formGroup}>
-            <label htmlFor="name">Seu Nome</label>
+            <label htmlFor="name" className={styles.label}>
+              Seu Nome <span aria-hidden="true">*</span>
+              <span className="sr-only">obrigatório</span>
+            </label>
             <input
               type="text"
               id="name"
@@ -77,48 +108,97 @@ export default function CommentForm() {
               onChange={(e) => setName(e.target.value)}
               maxLength={20}
               required
+              aria-required="true"
               className={styles.nameField}
-              placeholder="Digite seu nome"
+              placeholder="Digite seu nome completo"
+              aria-describedby="name-help"
             />
+            <small id="name-help" className={styles.helpText}>
+              Máximo 20 caracteres
+            </small>
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="comment">Seu Depoimento</label>
+            <label htmlFor="comment" className={styles.label}>
+              Seu Depoimento <span aria-hidden="true">*</span>
+              <span className="sr-only">obrigatório</span>
+            </label>
             <textarea
               id="comment"
               value={comment}
               onChange={handleCommentChange}
               maxLength={maxChars}
               required
+              aria-required="true"
               className={styles.commentField}
-              placeholder={`Máximo ${maxChars} caracteres`}
+              placeholder={`Compartilhe sua experiência (máximo ${maxChars} caracteres)`}
+              aria-describedby="comment-help char-counter"
             />
-            <span className={styles.charCounter}>
-              {charCount}/{maxChars}
-            </span>
+            <div className={styles.fieldInfo}>
+              <small id="comment-help" className={styles.helpText}>
+                Conte como foi sua experiência com nossos serviços
+              </small>
+              <span 
+                id="char-counter"
+                className={styles.charCounter}
+                aria-live="polite"
+              >
+                {charCount}/{maxChars}
+              </span>
+            </div>
           </div>
 
-          <button type="submit" className={styles.submitButton}>
+          <button 
+            type="submit" 
+            className={styles.submitButton}
+            aria-describedby="comment-help"
+          >
             Enviar Depoimento
           </button>
         </form>
 
-        <div className={styles.commentsList}>
-          <h4>Últimos Depoimentos</h4>
+        <div 
+          className={styles.commentsList}
+          aria-labelledby="comments-title"
+        >
+          <h3 id="comments-title">Últimos Depoimentos</h3>
+          
           {comments.length > 0 ? (
-            comments.map((c, index) => (
-              <div key={index} className={styles.comment}>
-                <div className={styles.commentHeader}>
-                  <span className={styles.commentAuthor}>{c.name}</span>
-                  <span className={styles.commentDate}>{c.date}</span>
-                </div>
-                <p className={styles.commentContent}>{c.comment}</p>
-              </div>
-            ))
+            <div className={styles.commentsContainer}>
+              {comments.map((c, index) => (
+                <article 
+                  key={index} 
+                  className={styles.comment}
+                  aria-labelledby={`comment-${index}-title`}
+                >
+                  <header className={styles.commentHeader}>
+                    <h4 
+                      id={`comment-${index}-title`}
+                      className={styles.commentAuthor}
+                    >
+                      {c.name}
+                    </h4>
+                    <time 
+                      dateTime={c.date} 
+                      className={styles.commentDate}
+                    >
+                      {c.date} às {c.time}
+                    </time>
+                  </header>
+                  <div className={styles.commentContent}>
+                    <p>{c.comment}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
           ) : (
-            <p style={{ color: '#a08b7d', fontStyle: 'italic' }}>
-              Seja o primeiro a deixar um depoimento!
-            </p>
+            <div 
+              className={styles.noComments}
+              role="status"
+              aria-live="polite"
+            >
+              <p>Nenhum depoimento ainda. Seja o primeiro a compartilhar sua experiência!</p>
+            </div>
           )}
         </div>
       </div>

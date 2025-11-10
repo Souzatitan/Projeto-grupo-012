@@ -1,71 +1,182 @@
 /* styles/WhatsAppButton.module.css */
 .whatsappContainer {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: 25px;
+  right: 25px;
   z-index: 999;
 }
 
 .whatsappButton {
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
+  justify-content: center;
+  gap: 10px;
   background-color: #25D366;
-  border-radius: 50%;
-  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  padding: 12px 20px;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
   transition: all 0.3s ease;
+  border: 2px solid #128C7E;
+  font-weight: 600;
+  min-width: 60px;
+  min-height: 60px;
 }
 
-.whatsappButton:hover {
+.whatsappButton:hover,
+.whatsappButton:focus {
   background-color: #128C7E;
-  transform: scale(1.1);
+  transform: scale(1.05);
+  box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+  outline: 3px solid rgba(37, 211, 102, 0.3);
 }
 
 .whatsappButton svg {
-  width: 32px;
-  height: 32px;
-  fill: white;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
 }
 
+/* Texto visível apenas em mobile */
+.mobileText {
+  display: none;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Tooltip para desktop */
 .tooltip {
   position: absolute;
-  right: 75px;
+  right: calc(100% + 15px);
   top: 50%;
   transform: translateY(-50%);
-  background-color: #333;
+  background-color: #1a1a1a;
   color: white;
-  padding: 8px 12px;
-  border-radius: 4px;
-  font-size: 14px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
   white-space: nowrap;
   opacity: 0;
   animation: fadeIn 0.3s ease-out forwards;
+  border: 1px solid #8B4513;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .tooltip::after {
   content: '';
   position: absolute;
-  right: -5px;
+  left: 100%;
   top: 50%;
   transform: translateY(-50%);
-  border-width: 5px;
+  border-width: 6px;
   border-style: solid;
-  border-color: transparent transparent transparent #333;
+  border-color: transparent transparent transparent #1a1a1a;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-50%) translateX(10px); }
-  to { opacity: 1; transform: translateY(-50%) translateX(0); }
+  from { 
+    opacity: 0; 
+    transform: translateY(-50%) translateX(-10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(-50%) translateX(0); 
+  }
 }
 
+/* Efeito de pulsar */
 @keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-  70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+  0% { 
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); 
+  }
+  70% { 
+    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); 
+  }
+  100% { 
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); 
+  }
 }
 
 .whatsappButton {
   animation: pulse 2s infinite;
+}
+
+/* Reduzir movimento se preferido */
+@media (prefers-reduced-motion: reduce) {
+  .whatsappButton {
+    animation: none;
+  }
+  
+  .tooltip {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* RESPONSIVIDADE */
+@media (min-width: 769px) {
+  .whatsappButton {
+    width: 60px;
+    height: 60px;
+    padding: 0;
+  }
+  
+  .mobileText {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .whatsappContainer {
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .whatsappButton {
+    padding: 12px 18px;
+    min-width: auto;
+  }
+  
+  .mobileText {
+    display: block;
+  }
+  
+  .tooltip {
+    display: none; /* Esconde tooltip em mobile */
+  }
+  
+  .whatsappButton svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .whatsappContainer {
+    bottom: 15px;
+    right: 15px;
+  }
+  
+  .whatsappButton {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+  
+  .whatsappButton svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Versão alternativa - apenas ícone (se preferir) */
+.whatsappButton.iconOnly {
+  padding: 0;
+  width: 60px;
+  height: 60px;
+}
+
+.whatsappButton.iconOnly .mobileText {
+  display: none;
 }

@@ -1,88 +1,180 @@
 /* styles/Contact.module.css */
-
 .contactSection {
-  width: 100vw;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 20px;
-  background-color: #f0f0f0;
+  width: 100%;
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 2.5rem;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 2px solid #8B4513;
+}
+
+.contactContainer {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.contactHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 3px solid #8B4513;
+}
+
+.contactHeader h2 {
+  color: #8B4513;
+  margin-bottom: 1rem;
+}
+
+.contactHeader p {
+  color: #404040;
+  font-size: 1.1rem;
+  margin: 0;
 }
 
 .contactForm {
-  width: 100%;
-  max-width: 600px;
-  padding: 40px;
   background: white;
-  border-radius: 20px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  border: 2px solid #E8D5C4;
 }
 
-.contactForm h2 {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #333;
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .formGroup {
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
 }
 
-.formGroup label {
+.label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
   font-weight: 600;
-  color: #555;
+  color: #1a1a1a;
+  font-size: 1rem;
 }
 
-.formGroup input,
-.formGroup textarea {
+.inputField,
+.textareaField {
   width: 100%;
-  padding: 12px 15px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  font-size: 16px;
-  transition: border 0.3s ease;
+  padding: 0.8rem 1rem;
+  border: 2px solid #8B4513;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: white;
+  transition: all 0.3s ease;
+  font-family: inherit;
 }
 
-.formGroup input:focus,
-.formGroup textarea:focus {
-  border-color: #d6b99a;
-  outline: none;
+.inputField:focus,
+.textareaField:focus {
+  outline: 3px solid rgba(139, 69, 19, 0.2);
+  border-color: #654321;
+}
+
+.inputField.error,
+.textareaField.error {
+  border-color: #DC143C;
+  background-color: #FFF5F5;
+}
+
+.textareaField {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.5;
+}
+
+.helpText {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.errorMessage {
+  display: block;
+  color: #DC143C;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  font-weight: 500;
 }
 
 .submitButton {
   width: 100%;
-  padding: 15px;
-  background: linear-gradient(135deg, #d6b99a, #c9a583);
+  padding: 1rem 2rem;
+  background: #8B4513;
   color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 18px;
+  border: 2px solid #654321;
+  border-radius: 8px;
+  font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin-top: 1rem;
 }
 
-.submitButton:hover {
-  background: linear-gradient(135deg, #c9a583, #b9926c);
+.submitButton:hover:not(:disabled),
+.submitButton:focus:not(:disabled) {
+  background: #654321;
   transform: translateY(-2px);
+  outline: 2px solid #8B4513;
 }
 
-/* Validação */
-.errorMessage {
-  color: #e74c3c;
-  font-size: 14px;
-  margin-top: 5px;
-  display: none;
+.submitButton:disabled {
+  background: #cccccc;
+  border-color: #999999;
+  cursor: not-allowed;
+  transform: none;
 }
 
-.error .errorMessage {
-  display: block;
+.submitButton:disabled:hover {
+  transform: none;
 }
 
-.error input,
-.error textarea {
-  border-color: #e74c3c;
+/* Responsividade */
+@media (max-width: 768px) {
+  .contactSection {
+    padding: 1.5rem;
+    margin: 2rem auto;
+  }
+  
+  .contactForm {
+    padding: 1.5rem;
+  }
+  
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  
+  .contactHeader {
+    margin-bottom: 2rem;
+  }
+  
+  .contactHeader h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contactForm {
+    padding: 1rem;
+  }
+  
+  .inputField,
+  .textareaField {
+    padding: 0.7rem 0.8rem;
+  }
+  
+  .submitButton {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
 }

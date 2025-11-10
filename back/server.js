@@ -29,7 +29,17 @@ app.use(session({
   }
 }));
 
-
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'Backend está funcionando!',
+    rotas_disponiveis: {
+      login: 'POST /api/login',
+      logout: 'POST /api/logout',
+      clientes: 'GET /api/clientes',
+      tipos_servico: 'GET /api/tipo_servico'
+    }
+  });
+});
 
 // Rota de login com verificação no banco de dados
 app.post('/api/login', async (req, res) => {

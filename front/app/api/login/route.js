@@ -1,26 +1,49 @@
 // app/api/login/route.js
 export async function POST(request) {
-  const { username, password } = await request.json();
+  try {
+    const { username, password } = await request.json();
 
-  // Configure suas credenciais válidas aqui
-  const validCredentials = [
-    { user: "admin", pass: "senha123" },
-    { user: "caravelas", pass: "moveis2024" }
-  ];
 
-  const isValid = validCredentials.some(
-    cred => cred.user === username && cred.pass === password
-  );
+    const isValid = validCredentials.some(
+      cred => cred.user === username && cred.pass === password
+    );
 
-  if (isValid) {
-    return Response.json({ 
-      success: true,
-      message: "Login bem-sucedido"
-    });
-  } else {
+    if (isValid) {
+      return Response.json({ 
+        success: true,
+        message: "Login bem-sucedido",
+        user: {
+          name: username,
+          role: "admin"
+        }
+      }, {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    } else {
+      return Response.json({ 
+        success: false,
+        message: "Usuário ou senha incorretos"
+      }, {
+        status: 401,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    }
+    
+  } catch (error) {
+    console.error('Erro no login:', error);
     return Response.json({ 
       success: false,
-      message: "Credenciais inválidas"
-    }, { status: 401 });
+      message: "Erro interno do servidor"
+    }, {
+      status: 500,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
   }
 }
